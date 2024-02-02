@@ -27,7 +27,9 @@ public class Item {
     private int price;
     private int stockQuantity; // 재고
     private String imagePath; // item 이미지 경로
-    private String delYn; // item 삭제 유무
+
+    @Builder.Default // Builder.Default 를 붙혀주지 않으면 Builder에 기본 null로 세팅되어 있기 때문에 db에 null이 들어간다.
+    private String delYn="N"; // item 삭제 유무
 
     @CreationTimestamp
     private LocalDateTime createdTime;
@@ -42,4 +44,8 @@ public class Item {
     public void updateStockQuantity(int newQuantity) { // update 시 stockQuantity를 newQuantity로 변경
         this.stockQuantity = newQuantity;
     }
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
 }
