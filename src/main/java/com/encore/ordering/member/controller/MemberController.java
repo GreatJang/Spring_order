@@ -59,6 +59,6 @@ public class MemberController {
         Map<String, Object> member_info = new HashMap<>();
         member_info.put("id", memeber.getId());
         member_info.put("token", jwtToken);
-        return new ResponseEntity<>(new CommonResponse(HttpStatus.OK, "member successfully logined",member_info), HttpStatus.OK);
+        return new ResponseEntity<>(new CommonResponse(HttpStatus.OK, "member successfully logined", member_info), HttpStatus.OK);
     }
 }

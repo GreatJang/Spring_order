@@ -29,8 +29,8 @@ public class Ordering {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus = OrderStatus.ORDERED;
 
-    @OneToMany(mappedBy = "ordering", cascade = CascadeType.PERSIST)
-    private List<OrderItem> orderItems = new ArrayList<>();
+//    @OneToMany(mappedBy = "ordering", cascade = CascadeType.PERSIST)
+//    private List<OrderItem> orderItems = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdTime;
