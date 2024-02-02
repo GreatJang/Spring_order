@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .authorizeRequests()
 //                인증 미적용 url 패턴 작성
-                    .antMatchers("/member/create", "/doLogin", "/items", "/item/image/**")
+                    .antMatchers("/member/create", "/doLogin", "/items", "/item/*/image")
                     .permitAll()
 //                그외 요청은 모두 인증필요
                 .anyRequest().authenticated()

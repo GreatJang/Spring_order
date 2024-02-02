@@ -41,11 +41,17 @@ public class Item {
         this.delYn = "Y";
     }
 
+    public void updateItem(String name, String category, int price, int stockQuantity, String imagePath) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.imagePath = imagePath;
+    }
     public void updateStockQuantity(int newQuantity) { // update 시 stockQuantity를 newQuantity로 변경
         this.stockQuantity = newQuantity;
     }
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
-
 }
