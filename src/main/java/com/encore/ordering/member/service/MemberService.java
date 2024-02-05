@@ -48,7 +48,6 @@ public class MemberService {
         return members.stream().map(m->MemberResponseDto.toMemberResponseDto(m)).collect(Collectors.toList());
     }
 
-
     public Member login(LoginReqDto loginReqDto) throws IllegalArgumentException{
 //        email 존재여부
         Member member = memberRepository.findByEmail(loginReqDto.getEmail())

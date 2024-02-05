@@ -20,7 +20,7 @@ import java.util.List;
 public class OrderReqDto {
     private List<OrderReqItemDto> orderReqItemDtos ;
     @Data
-    private static class OrderReqItemDto{
+    public static class OrderReqItemDto{
         private Long itemId;
         private int count;
     }

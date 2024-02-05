@@ -31,12 +31,13 @@ public class JwtAuthFilter extends GenericFilter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        try { // 예외 처리 //membercreate후 토큰이 null이면 if문 지나친다.
+        try { // 예외 처리 //member create후 토큰이 null이면 if문 지나친다.
             String bearerToken = ((HttpServletRequest) request).getHeader("Authorization");
             if (bearerToken !=null) {
                 if (!bearerToken.substring(0, 7).equals("Bearer ")) {
                     throw new AuthenticationServiceException("token의 형식이 맞지 않습니다.");
                 }
+
 //            그 토큰값이 secret값과 동일한지 검증해야함.
 //            bearer토큰에서 토큰값만 추출
                 String token = bearerToken.substring(7);
