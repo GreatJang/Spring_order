@@ -56,7 +56,7 @@ public class JwtAuthFilter extends GenericFilter {
             }
 //            filterchain에서 그 다음 filtering으로 넘어가도록 하는 메서드
             chain.doFilter(request, response);
-        }catch (AuthenticationServiceException e){
+        }catch (Exception e){
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
             httpServletResponse.setContentType("application/json");

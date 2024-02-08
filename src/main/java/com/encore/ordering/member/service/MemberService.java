@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +31,12 @@ public class MemberService {
     }
 
     public Member create(MemberCreateReqDto memberCreateReqDto) {
+//        memberRepository.findByEmail(memberCreateReqDto.getEmail())
+//                .orElseThrow(()->new IllegalArgumentException("이미 존재하는 회원정보 입니다."));
+        Optional<Member> byEmail = memberRepository.findByEmail((memberCreateReqDto.getEmail()));
+        if(byEmail.isPresent()){
+            throw new IllegalArgumentException("이미 존재하는 회원입니다.");
+        }
         memberCreateReqDto.setPassword(passwordEncoder.encode(memberCreateReqDto.getPassword()));
         Member member = Member.toEntity(memberCreateReqDto);
         return memberRepository.save(member);
