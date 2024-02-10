@@ -65,11 +65,11 @@ public class MemberController {
 
     @PostMapping("/doLogin") //doLogin은 토큰 사용으로 Map형식으로 받아주어야함 // Map<String, Object>
     public ResponseEntity<CommonResponse> memberLogin(@Valid @RequestBody LoginReqDto loginReqDto) {
-        Member memeber = memberService.login(loginReqDto);
+        Member member = memberService.login(loginReqDto);
 //        토큰 생성
-        String jwtToken = jwtTokenProvider.createToken(memeber.getEmail(), memeber.getRole().toString());
+        String jwtToken = jwtTokenProvider.createToken(member.getEmail(), member.getRole().toString());
         Map<String, Object> member_info = new HashMap<>();
-        member_info.put("id", memeber.getId());
+        member_info.put("id", member.getId());
         member_info.put("token", jwtToken);
         return new ResponseEntity<>(new CommonResponse(HttpStatus.OK, "member successfully logined", member_info), HttpStatus.OK);
     }
