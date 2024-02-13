@@ -12,7 +12,6 @@ import com.encore.ordering.order.repository.OrderRepository;
 import com.encore.ordering.order_item.domain.OrderItem;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ public class OrderService {
         this.itemRepository = itemRepository;
     }
 
-    public Ordering create(OrderReqDto orderReqDto) { // 어떤 아이템 몇개 주문할건지 Dto에 다 들어가 있음.
+    public Ordering create(List<OrderReqDto> orderReqDtos) { // 어떤 아이템 몇개 주문할건지 Dto에 다 들어가 있음.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         Member member = memberRepository.findByEmail(email)
@@ -44,7 +43,7 @@ public class OrderService {
 
         Ordering ordering = Ordering.builder().member(member).build();
 //        Ordering객체가 생성될 때 OrderingItem 객체도 함께 생성 : cascading
-        for (OrderReqDto.OrderReqItemDto dto : orderReqDto.getOrderReqItemDtos()) {
+        for (OrderReqDto dto : orderReqDtos) {
             Item item = itemRepository.findById(dto.getItemId()).orElseThrow(() -> new EntityNotFoundException("Item not found"));
             OrderItem orderItem = OrderItem.builder()
                     .item(item)

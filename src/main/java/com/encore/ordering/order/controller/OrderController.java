@@ -8,7 +8,6 @@ import com.encore.ordering.order.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +22,9 @@ public class OrderController {
     }
 
     @PostMapping("/order/create")
-    public ResponseEntity<CommonResponse> orderCreate(@RequestBody OrderReqDto orderReqDto){
-        Ordering ordering = orderService.create(orderReqDto);
-        return new ResponseEntity<>(new CommonResponse(HttpStatus.CREATED, "order succesfully created", ordering.getId()), HttpStatus.CREATED);
+    public ResponseEntity<CommonResponse> orderCreate(@RequestBody List<OrderReqDto> orderReqDtos){
+        Ordering ordering = orderService.create(orderReqDtos);
+        return new ResponseEntity<>(new CommonResponse(HttpStatus.CREATED, "order successfully created", ordering.getId()), HttpStatus.CREATED);
     }
 
     //admin이거나 email이 인증된 email인지 controller단에서 확인
@@ -33,7 +32,7 @@ public class OrderController {
     public ResponseEntity<CommonResponse> ordercancel(@PathVariable Long id){
         Ordering ordering = orderService.cancel(id);
         return new ResponseEntity<>(new CommonResponse(HttpStatus.OK,
-                "cancel succesfully created", ordering.getId()), HttpStatus.OK);
+                "cancel successfully created", ordering.getId()), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
